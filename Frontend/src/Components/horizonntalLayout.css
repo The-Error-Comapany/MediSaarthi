@@ -1,0 +1,107 @@
+html,
+body {
+  background: #050505 !important;
+  color: #e5e7eb;
+}
+
+.layout-root {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(34,211,238,0.15), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(16,185,129,0.15), transparent 40%),
+    #050505;
+}
+
+
+.bg-light,
+.bg-white {
+  background: transparent !important;
+}
+
+main {
+  background: transparent;
+}
+
+
+.navbar {
+  background: rgba(15, 15, 15, 0.75) !important;
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.navbar-brand {
+  font-weight: 800;
+  background: linear-gradient(135deg, #22d3ee, #10b981);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+.nav-link {
+  color: #cbd5e1 !important;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #22d3ee !important;
+}
+
+
+.nav-link.border-bottom {
+  color: #22d3ee !important;
+  border-color: #22d3ee !important;
+}
+
+.btn-outline-secondary {
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #e5e7eb;
+  background: transparent;
+}
+
+.btn-outline-secondary:hover {
+  background: white;
+  color: #020617;
+}
+
+.dropdown-item {
+  background: transparent;
+  color: #e5e7eb;
+}
+
+.dropdown-item:hover {
+  background: rgba(34,211,238,0.15);
+  color: #22d3ee;
+}
+
+
+.position-absolute.bg-white {
+  background: rgba(20, 20, 20, 0.9) !important;
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+footer {
+  background: rgba(15, 15, 15, 0.9) !important;
+  backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+footer a {
+  color: #9ca3af;
+}
+
+footer a.text-primary {
+  color: #22d3ee !important;
+}
+
+input[type="date"] {
+  background: rgba(20, 20, 20, 0.75);
+  color: #e5e7eb;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+input[type="date"]:focus {
+  border-color: #22d3ee;
+  box-shadow: 0 0 0 2px rgba(34,211,238,0.25);
+}
