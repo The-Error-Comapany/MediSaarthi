@@ -1,0 +1,278 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+
+/* ================= GLOBAL ================= */
+.home-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  font-family: "Poppins", sans-serif;
+  color: #e5e7eb;
+
+  background:
+    radial-gradient(circle at 20% 20%, rgba(34,211,238,0.15), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(16,185,129,0.15), transparent 40%),
+    #050505;
+
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  animation: fadeIn 1s ease-in;
+}
+
+/* ================= HERO ================= */
+.home-hero {
+  text-align: center;
+  padding: 120px 20px 90px;
+  max-width: 900px;
+  margin: 0 auto;
+
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeInUp 1.2s ease-out forwards;
+}
+
+.home-title {
+  font-size: 3.6rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+
+  background: linear-gradient(135deg, #22d3ee, #10b981);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  margin-bottom: 18px;
+
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: slideDown 1.4s ease-out forwards;
+  animation-delay: 0.3s;
+}
+
+.home-subtitle {
+  font-size: 1.3rem;
+  color: #cbd5e1;
+  margin-bottom: 45px;
+  line-height: 1.6;
+
+  opacity: 0;
+  animation: fadeIn 1.4s ease-out forwards;
+  animation-delay: 0.6s;
+}
+
+/* ================= HERO BUTTONS ================= */
+.home-buttons {
+  display: flex;
+  gap: 28px;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  opacity: 0;
+  animation: fadeIn 1.4s ease-out forwards;
+  animation-delay: 0.9s;
+}
+
+.home-btn {
+  padding: 14px 40px;
+  font-size: 1.05rem;
+  border-radius: 999px;
+  cursor: pointer;
+
+  transition: all 0.35s ease;
+  position: relative;
+  z-index: 1;
+  font-weight: 600;
+}
+
+.home-btn.primary {
+  background: linear-gradient(135deg, #22d3ee, #10b981);
+  color: #020617;
+  border: none;
+
+  box-shadow: 0 10px 30px rgba(34, 211, 238, 0.35);
+}
+
+.home-btn.primary:hover {
+  transform: translateY(-4px) scale(1.07);
+  box-shadow: 0 16px 45px rgba(34, 211, 238, 0.55);
+}
+
+.home-btn.secondary {
+  background: transparent;
+  color: #e5e7eb;
+  border: 1px solid rgba(255,255,255,0.35);
+}
+
+.home-btn.secondary:hover {
+  background: white;
+  color: #020617;
+  transform: translateY(-4px) scale(1.07);
+}
+
+/* ================= ABOUT ================= */
+.home-about {
+  margin-top: 120px;
+  text-align: center;
+  max-width: 1000px;
+  padding: 0 20px;
+
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1.2s ease-out forwards;
+  animation-delay: 0.5s;
+}
+
+.home-about h2 {
+  font-size: 2.6rem;
+  margin-bottom: 22px;
+  font-weight: 700;
+
+  background: linear-gradient(135deg, #22d3ee, #10b981);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.home-about p {
+  color: #cbd5e1;
+  font-size: 1.1rem;
+  margin-bottom: 70px;
+  line-height: 1.7;
+}
+
+/* ================= FEATURES GRID ================= */
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 34px;
+}
+
+/* ================= FEATURE CARD ================= */
+.feature-card {
+  width: 280px;
+  padding: 38px 28px;
+  border-radius: 22px;
+
+  background: rgba(20, 20, 20, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.7),
+    0 0 40px rgba(34,211,238,0.12);
+
+  transition: transform 0.45s ease, box-shadow 0.45s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 22px;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(34,211,238,0.4),
+    transparent
+  );
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.feature-card:hover {
+  transform: translateY(-12px) scale(1.05);
+  box-shadow:
+    0 30px 90px rgba(0,0,0,0.9),
+    0 0 70px rgba(34,211,238,0.25);
+}
+
+/* ================= FEATURE CONTENT ================= */
+.feature-card i {
+  font-size: 2.9rem;
+  margin-bottom: 22px;
+  display: inline-block;
+
+  background: linear-gradient(135deg, #22d3ee, #10b981);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  transition: transform 0.4s ease;
+}
+
+.feature-card:hover i {
+  transform: scale(1.25) rotate(8deg);
+}
+
+.feature-card h3 {
+  font-size: 1.4rem;
+  margin-bottom: 14px;
+  color: #f1f5f9;
+}
+
+.feature-card p {
+  font-size: 1rem;
+  color: #9ca3af;
+  line-height: 1.55;
+}
+
+/* ================= FOOTER ================= */
+.home-footer {
+  margin-top: 120px;
+  text-align: center;
+  padding: 34px 0;
+
+  color: #9ca3af;
+  font-size: 0.95rem;
+  width: 100%;
+
+  background: rgba(15, 15, 15, 0.6);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+/* ================= ANIMATIONS ================= */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .home-title {
+    font-size: 2.6rem;
+  }
+
+  .home-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .feature-card {
+    width: 92%;
+  }
+}

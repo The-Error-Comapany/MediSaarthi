@@ -1,0 +1,343 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+/* ================= RESET ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  min-height: 100vh;
+  background-color: #050505;
+}
+
+
+/* ================= GLOBAL ================= */
+body {
+  font-family: "Poppins", sans-serif;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(34,211,238,0.15), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(16,185,129,0.15), transparent 40%),
+    #050505;
+  color: #e5e7eb;
+}
+
+/* ================= PAGE WRAPPER ================= */
+.register-page {
+  width: 100%;
+  min-height: 100vh;
+
+  background:
+    radial-gradient(circle at 20% 20%, rgba(34,211,238,0.15), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(16,185,129,0.15), transparent 40%),
+    #050505;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* ================= MAIN GLASS CONTAINER ================= */
+.auth-container {
+  position: relative;
+  width: 900px;
+  height: 550px;
+
+  background: rgba(20, 20, 20, 0.75);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.03),
+    0 30px 80px rgba(0,0,0,0.8),
+    0 0 60px rgba(34,211,238,0.12);
+
+  overflow: hidden;
+  display: flex;
+}
+
+/* subtle glowing edge */
+.auth-container::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 24px;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(34,211,238,0.4),
+    transparent
+  );
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* ================= FORMS SIDE ================= */
+.forms-container {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  min-height: 550px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden; /* 🔥 important */
+  transition: all 0.6s ease-in-out;
+}
+
+
+/* ================= AUTH FORM ================= */
+.auth-form {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 80%;
+  min-height: 360px;
+
+  transition: all 0.5s ease-in-out;
+  text-align: center;
+}
+
+
+.auth-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: fadeSlideIn 0.35s ease-in-out;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.auth-form h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+/* ================= INPUTS ================= */
+.auth-form input {
+  padding: 14px;
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+
+  color: #e5e7eb;
+  font-size: 0.95rem;
+
+  transition: all 0.3s ease;
+}
+
+.auth-form input::placeholder {
+  color: #9ca3af;
+}
+
+.auth-form input:focus {
+  outline: none;
+  border-color: #22d3ee;
+  box-shadow: 0 0 0 2px rgba(34,211,238,0.25);
+  background: rgba(255,255,255,0.08);
+}
+
+/* ================= BUTTONS ================= */
+.auth-form button {
+  background: linear-gradient(135deg, #22d3ee, #10b981);
+  color: #020617;
+
+  border: none;
+  padding: 14px;
+  border-radius: 999px;
+
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.auth-form button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 30px rgba(34,211,238,0.35);
+}
+
+.auth-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ================= TEXT LINKS ================= */
+.auth-form .link-btn {
+  all: unset;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #94a3b8;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+.auth-form .link-btn:hover {
+  color: #22d3ee;
+}
+
+/* ================= MESSAGES ================= */
+.error-message {
+  color: #f87171;
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+.success-message {
+  color: #34d399;
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+/* ================= FORM POSITIONING ================= */
+.signin-form {
+  transform: translate(-0%, -50%);
+  opacity: 1;
+  z-index: 2;
+}
+
+.signup-form {
+  transform: translate(120%, -50%);
+  opacity: 0;
+  z-index: 1;
+}
+
+.auth-container.change .signin-form {
+  transform: translate(-120%, -50%);
+  opacity: 0;
+}
+
+.auth-container.change .signup-form {
+  transform: translate(0%, -50%);
+  opacity: 1;
+  z-index: 2;
+}
+
+
+/* ================= INTRO / INFO SIDE ================= */
+.intros-container {
+  width: 50%;
+  height: 100%;
+
+  background:
+    radial-gradient(circle at top, rgba(34,211,238,0.25), transparent 55%),
+    radial-gradient(circle at bottom, rgba(16,185,129,0.25), transparent 55%),
+    #020617;
+
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-left: 1px solid rgba(255,255,255,0.08);
+}
+
+.intro-control {
+  position: absolute;
+  width: 100%;
+  padding: 0 40px;
+  transition: all 0.6s ease-in-out;
+  text-align: center;
+}
+
+.intro-control h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.intro-control p {
+  font-size: 0.95rem;
+  margin-bottom: 22px;
+  color: #cbd5f5;
+}
+
+.intro-control button {
+  border: 1px solid rgba(255,255,255,0.4);
+  background: transparent;
+  color: white;
+
+  padding: 12px 28px;
+  border-radius: 999px;
+  font-weight: 500;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.intro-control button:hover {
+  background: white;
+  color: #020617;
+}
+
+/* ================= INTRO STATES ================= */
+.signin-intro {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.signup-intro {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.auth-container.change .signin-intro {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+
+.auth-container.change .signup-intro {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .auth-container {
+    flex-direction: column;
+    height: auto;
+    width: 92%;
+  }
+
+  .forms-container,
+  .intros-container {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .auth-form {
+    position: relative;
+    width: 100%;
+  }
+
+  .signin-form,
+  .signup-form {
+    left: 0 !important;
+    opacity: 1 !important;
+  }
+
+  .intro-control {
+    position: relative;
+    padding: 30px;
+  }
+}

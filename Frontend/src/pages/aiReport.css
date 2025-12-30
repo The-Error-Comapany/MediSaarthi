@@ -1,0 +1,101 @@
+
+.ai-report-title {
+  font-size: 2.4rem;
+  font-weight: 800;
+  margin-bottom: 30px;
+
+  background: linear-gradient(135deg, #22d3ee, #10b981);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.ai-report-card {
+  background: rgba(18,18,18,0.75);
+  backdrop-filter: blur(16px);
+  border-radius: 22px;
+  padding: 24px;
+  margin-bottom: 22px;
+
+  box-shadow:
+    0 20px 55px rgba(0,0,0,0.8),
+    0 0 50px rgba(34,211,238,0.12);
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ai-report-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.9),
+    0 0 70px rgba(34,211,238,0.2);
+}
+
+.ai-report-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.ai-report-header h5 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.risk-pill {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.risk-pill.low {
+  background: rgba(34,211,238,0.15);
+  color: #22d3ee;
+}
+
+.risk-pill.medium {
+  background: rgba(245,158,11,0.15);
+  color: #f59e0b;
+}
+
+.risk-pill.high {
+  background: rgba(239,68,68,0.2);
+  color: #ef4444;
+}
+
+/* Risk text */
+.ai-risk {
+  margin-bottom: 14px;
+  color: #cbd5e1;
+}
+
+.ai-risk strong {
+  color: #22d3ee;
+}
+
+/* Reasons list */
+.ai-reasons {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.ai-reasons li {
+  padding: 8px 0;
+  font-size: 0.95rem;
+  color: #9ca3af;
+  border-bottom: 1px dashed rgba(255,255,255,0.08);
+}
+
+.ai-reasons li:last-child {
+  border-bottom: none;
+}
+
+/* Loading state */
+.ai-loading {
+  color: #9ca3af;
+  font-size: 1rem;
+}
