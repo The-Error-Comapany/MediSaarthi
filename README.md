@@ -1,4 +1,4 @@
-# 🩺 MediSaarthi
+#  MediSaarthi
 
 > **Your companion for consistent medication adherence.**  
 > **Smart Medication Adherence & Assistance Platform**  
@@ -7,13 +7,13 @@
 
 ---
 
-## 📌 Project Overview
+##  Project Overview
 
 **MediSaarthi** is a full-stack, AI-assisted medication adherence and management platform designed to help users **take medicines on time**, **track taken and missed doses**, **analyze adherence patterns**, and **receive smart reminders** — all in one secure and responsive web application.
 
 ---
 
-## 🚀 Key Features
+##  Key Features
 
 - Secure authentication with Google Sign-In  
 - Smart dose logging (Taken / Missed)  
@@ -41,7 +41,7 @@
 
 ## 🏠 Dashboard
 
-### ✅ Dose Logging
+###  Dose Logging
 - Users can manually mark each scheduled dose as:
   - **Taken**
   - **Missed**
@@ -183,9 +183,9 @@ A safe and controlled AI assistant designed to support users without replacing m
 - User’s dose log history  
 
 ### Safety Constraints
-- ❌ Does NOT prescribe medicines  
-- ❌ Does NOT provide diagnosis or treatment advice  
-- ⚠️ Carefully avoids doctor-level medical suggestions  
+-  Does NOT prescribe medicines  
+-  Does NOT provide diagnosis or treatment advice  
+-  Carefully avoids doctor-level medical suggestions  
 
 ---
 
@@ -212,11 +212,11 @@ A safe and controlled AI assistant designed to support users without replacing m
 
 ## 🧠 Why MediSaarthi?
 
-✔ Encourages medication discipline  
-✔ Prevents missed doses with smart reminders  
-✔ Converts raw dose data into meaningful insights  
-✔ Integrates seamlessly with Google Calendar  
-✔ Demonstrates real-world full-stack engineering skills  
+ Encourages medication discipline  
+ Prevents missed doses with smart reminders  
+ Converts raw dose data into meaningful insights  
+ Integrates seamlessly with Google Calendar  
+ Demonstrates real-world full-stack engineering skills  
 
 ---
 
@@ -242,7 +242,7 @@ A safe and controlled AI assistant designed to support users without replacing m
 
 ---
 
-## ⚠️ Disclaimer
+##  Disclaimer
 
 This application **does not replace professional medical advice**.  
 Users should always consult qualified healthcare professionals for diagnosis and treatment decisions.
