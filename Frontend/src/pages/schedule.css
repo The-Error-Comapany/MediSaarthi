@@ -1,0 +1,384 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+/* ================= PAGE BACKGROUND ================= */
+body {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(34,211,238,0.15), transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(16,185,129,0.15), transparent 40%),
+    #050505 !important;
+
+  font-family: "Inter", sans-serif;
+  color: #e5e7eb;
+}
+
+/* ================= TITLES ================= */
+.main-title {
+  font-size: 2.6rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 2rem;
+
+  background: linear-gradient(135deg, #22d3ee, #10b981);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ================= PAGE HEADER ================= */
+.page-header h2 {
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.linked {
+  color: #22d3ee;
+  font-weight: 600;
+}
+
+/* ================= FORM CARD ================= */
+#medicine-form {
+  background: rgba(20, 20, 20, 0.8) !important;
+  backdrop-filter: blur(14px);
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+    0 25px 70px rgba(0,0,0,0.85),
+    0 0 60px rgba(34,211,238,0.18);
+}
+
+/* ================= INPUTS & SELECT ================= */
+.form-control,
+.form-select {
+  background: rgba(15, 15, 15, 0.8);
+  color: #e5e7eb;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.form-control::placeholder {
+  color: #9ca3af;
+}
+
+.form-control:focus,
+.form-select:focus {
+  background: rgba(15, 15, 15, 0.95);
+  border-color: #22d3ee;
+  box-shadow: 0 0 0 2px rgba(34,211,238,0.25);
+  color: #fff;
+}
+
+/* ================= BUTTONS ================= */
+.medicine-card .card-header .btn {
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 0.9rem;
+}
+
+.medicine-card .btn-primary {
+  background: rgba(0,0,0,0.15);
+  border: none;
+  color: #020617;
+}
+
+.medicine-card .btn-danger {
+  background: rgba(0,0,0,0.15);
+  border: none;
+  color: #ef4444;
+}
+
+.medicine-card .btn-primary:hover {
+  background: rgba(0,0,0,0.25);
+}
+
+.medicine-card .btn-danger:hover {
+  background: rgba(239,68,68,0.2);
+}
+
+
+/* ================= MEDICINE CARD ================= */
+.medicine-card {
+  background: rgba(15, 15, 15, 0.75);
+  backdrop-filter: blur(16px);
+  border-radius: 22px;
+  border: 1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+    0 25px 70px rgba(0,0,0,0.85),
+    0 0 60px rgba(34,211,238,0.18);
+
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.medicine-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow:
+    0 35px 100px rgba(0,0,0,0.95),
+    0 0 80px rgba(34,211,238,0.3);
+}
+
+
+/* ================= CARD HEADER ================= */
+.medicine-card .card-header {
+  background: linear-gradient(135deg, #22d3ee, #10b981);
+  color: #020617;
+
+  font-weight: 700;
+  font-size: 1.1rem;
+
+  padding: 16px 20px;
+  border: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+/* ================= MODAL ================= */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+}
+
+.modal-content {
+  background: rgba(20, 20, 20, 0.85);
+  backdrop-filter: blur(16px);
+  border-radius: 22px;
+  padding: 30px;
+  color: #e5e7eb;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow:
+    0 30px 90px rgba(0,0,0,0.9),
+    0 0 70px rgba(34,211,238,0.25);
+}
+
+/* ================= EMPTY STATE ================= */
+.text-muted {
+  color: #9ca3af !important;
+}
+
+/* ===== FORCE DARK FORM INPUTS ===== */
+.form-control,
+.form-select {
+  background-color: rgba(15, 15, 15, 0.85) !important;
+  color: #e5e7eb !important;
+  border: 1px solid rgba(255,255,255,0.15) !important;
+  border-radius: 12px;
+}
+
+.form-control::placeholder {
+  color: #9ca3af !important;
+}
+.form-control:focus,
+.form-select:focus {
+  background-color: rgba(15, 15, 15, 0.95) !important;
+  color: #ffffff !important;
+  border-color: #22d3ee !important;
+  box-shadow: 0 0 0 2px rgba(34,211,238,0.3) !important;
+}
+.form-select {
+  background-image:
+    linear-gradient(45deg, transparent 50%, #22d3ee 50%),
+    linear-gradient(135deg, #22d3ee 50%, transparent 50%);
+  background-position:
+    calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px);
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+#medicine-form {
+  padding: 32px;
+}
+
+#medicine-form h4 {
+  font-weight: 700;
+  color: #f1f5f9;
+}
+.medicine-card .card-body {
+  padding: 22px;
+  color: #e5e7eb;
+}
+
+.medicine-card .card-body p {
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.medicine-card .card-body strong {
+  color: #f1f5f9;
+  font-weight: 600;
+}
+.medicine-card .card-body p:not(:last-child) {
+  border-bottom: 1px dashed rgba(255,255,255,0.08);
+  padding-bottom: 8px;
+}
+.medicine-card .card-header span {
+  text-shadow: 0 0 12px rgba(255,255,255,0.35);
+}
+/* ===== ROUND MEDICINE CARD EDGES ===== */
+.medicine-card {
+  border-radius: 24px;     /* main rounding */
+  overflow: hidden;        /* IMPORTANT */
+}
+
+/* Round only the top of header */
+.medicine-card .card-header {
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+}
+/* ================= GOOGLE CALENDAR ICON ================= */
+
+.calendar-icon-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+/* Button reset */
+.calendar-icon-btn {
+  position: relative;
+  border: none;
+  background: transparent;
+  padding: 6px;
+  border-radius: 50%;
+  cursor: pointer;
+
+  transition: transform 0.25s ease;
+}
+
+.calendar-icon-btn:hover {
+  transform: scale(1.08);
+}
+
+/* Calendar image */
+.calendar-icon {
+  width: 40px;
+  height: 40px;
+  display: block;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+/* Linked state */
+.calendar-icon-btn.linked .calendar-icon {
+  filter: none;
+  opacity: 1;
+  box-shadow: 0 0 25px rgba(34, 211, 238, 0.6);
+  border-radius: 8px;
+}
+
+/* Green check overlay */
+.calendar-check {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+
+  background: linear-gradient(135deg, #22d3ee, #10b981);
+  color: #020617;
+
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 14px;
+  font-weight: bold;
+
+  box-shadow: 0 0 10px rgba(34,211,238,0.6);
+}
+/* ================= PRIMARY SAVE BUTTON ================= */
+
+.medicine-save-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 12px 28px;
+  border-radius: 999px;
+  border: none;
+
+  font-weight: 700;
+  font-size: 0.95rem;
+
+  background: linear-gradient(135deg, #22d3ee, #10b981);
+  color: #020617;
+
+  box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+.medicine-save-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow:
+  0 16px 40px rgba(0,0,0,0.6);
+}
+
+.medicine-save-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Disabled / loading state */
+.medicine-save-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Spinner */
+.medicine-save-btn .spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(2, 6, 23, 0.25);
+  border-top-color: #020617;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* ================= FORM ACTION BAR ================= */
+
+.form-actions {
+  position: sticky;
+  bottom: 0;
+  margin-top: 24px;
+
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+
+  padding: 16px 0;
+  background: linear-gradient(
+    to top,
+    rgba(5,5,5,0.85),
+    rgba(5,5,5,0.4),
+    transparent
+  );
+}
+
+/* Cancel button */
+.medicine-cancel-btn {
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #e5e7eb;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.medicine-cancel-btn:hover {
+  background: rgba(255,255,255,0.15);
+}
