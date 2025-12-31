@@ -180,7 +180,8 @@ A safe and controlled AI assistant designed to support users without replacing m
 - Can tell:
 - What medicines the user is taking
 - What was taken or missed on a particular day
-- User’s dose log history  
+- User’s dose log history
+-  The AI medical assistant maintains **session-based conversational memory**, allowing it to remember previous messages within the same session and provide **context-aware, continuous responses** instead of isolated replies.
 
 ### Safety Constraints
 -  Does NOT prescribe medicines  
