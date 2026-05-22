@@ -19,7 +19,7 @@ const Signup = () => {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:8000/api/v1/users/register", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/users/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
@@ -41,7 +41,7 @@ const Signup = () => {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:8000/api/v1/users/verify-otp", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/users/verify-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -62,7 +62,7 @@ const Signup = () => {
 
   const resendOtp = async () => {
     try {
-      await fetch("http://localhost:8000/api/v1/users/resend-otp", {
+      await fetch(`${import.meta.env.VITE_API_URL}/api/v1/users/resend-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -94,7 +94,7 @@ const Signup = () => {
 
   const handleGoogleSignup = async (response) => {
     try {
-      const res = await fetch("http://localhost:8000/api/v1/auth/google", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/auth/google`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ credential: response.credential }),

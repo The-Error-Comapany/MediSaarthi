@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import {io} from "socket.io-client";
 import Plotly from "plotly.js-dist";
 
-const SOCKET_URL = "http://localhost:8000";
+const SOCKET_URL = import.meta.env.VITE_API_URL;
 
 export default function RealtimeAdherence({ userId }) {
   const plotRef = useRef(null);

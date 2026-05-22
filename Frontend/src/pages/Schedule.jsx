@@ -34,7 +34,7 @@ const Schedule = () => {
   useEffect(() => {
     const checkLinked = async () => {
       try {
-        const res = await fetch("http://localhost:8000/api/v1/calendar/check");
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/calendar/check`);
         const data = await res.json();
         setCalendarLinked(data.linked);
       } catch (err) {
@@ -44,11 +44,11 @@ const Schedule = () => {
     checkLinked();
   }, []);
 
-  const handleLinkCalendar = () => window.location.href = "http://localhost:8000/api/v1/calendar/auth";
+  const handleLinkCalendar = () => window.location.href = `${import.meta.env.VITE_API_URL}/api/v1/calendar/auth`;
   const handleUnlinkCalendar = async () => {
     if (!window.confirm("Are you sure you want to unlink your Google Calendar?")) return;
     try {
-      const res = await fetch("http://localhost:8000/api/v1/calendar/unlink", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/calendar/unlink`, {
           method: "POST",
         });
       if (!res.ok) throw new Error("Unlink failed");

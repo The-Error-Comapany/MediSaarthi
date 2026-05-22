@@ -23,7 +23,7 @@ const Signin = () => {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:8000/api/v1/users/signin", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/users/signin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -48,7 +48,7 @@ const Signin = () => {
     setLoading(true);
 
     try {
-      await fetch("http://localhost:8000/api/v1/users/forgot-password", {
+      await fetch(`${import.meta.env.VITE_API_URL}/api/v1/users/forgot-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -69,7 +69,7 @@ const Signin = () => {
 
     try {
       const res = await fetch(
-        "http://localhost:8000/api/v1/users/reset-password",
+        `${import.meta.env.VITE_API_URL}/api/v1/users/reset-password`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -113,7 +113,7 @@ const Signin = () => {
     try {
       setLoading(true);
 
-      const res = await fetch("http://localhost:8000/api/v1/auth/google", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/auth/google`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

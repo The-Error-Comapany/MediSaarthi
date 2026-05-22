@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
  const fetchUser = async () => {
     try {
       const res = await fetchWithAuth(
-        "http://localhost:8000/api/v1/users/me"
+        `${import.meta.env.VITE_API_URL}/api/v1/users/me`
       );
 
       if (res.status === 401) {
@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
-      await fetch("http://localhost:8000/api/v1/users/logout", {
+      await fetch(`${import.meta.env.VITE_API_URL}/api/v1/users/logout`, {
         method: "POST",
         credentials: "include",
       });
