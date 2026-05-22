@@ -1,17 +1,18 @@
 import { Router } from "express";
-import crypto from "crypto";
+import jwt from "jsonwebtoken";
 import axios from "axios";
 import CalendarToken from "../DataModels/calendarToken.model.js";
 
 const router = Router();
-const stateStore = new Set();
+
+// Use a signed JWT as CSRF state — works across serverless instances
+const STATE_SECRET = process.env.REFRESH_TOKEN_SECRET || "calendar-state-secret";
 
 router.get("/auth", (req, res) => {
-  const state = crypto.randomBytes(20).toString("hex");
-  stateStore.add(state);
+  // Sign a short-lived token as the CSRF state
+  const state = jwt.sign({ ts: Date.now() }, STATE_SECRET, { expiresIn: "10m" });
 
   console.log("REDIRECT_URI USED:", process.env.REDIRECT_URI);
-
 
   const authUrl = new URL("https://accounts.google.com/o/oauth2/v2/auth");
   authUrl.searchParams.set("client_id", process.env.CLIENT_ID);
@@ -31,8 +32,13 @@ router.get("/auth", (req, res) => {
 router.get("/oauth2callback", async (req, res) => {
   try {
     const { code, state } = req.query;
-    if (!stateStore.has(state)) return res.status(400).send("Invalid state");
-    stateStore.delete(state);
+
+    // Verify the signed state JWT
+    try {
+      jwt.verify(state, STATE_SECRET);
+    } catch {
+      return res.status(400).send("Invalid or expired state");
+    }
 
     const params = new URLSearchParams();
     params.append("code", code);
@@ -59,9 +65,10 @@ router.get("/oauth2callback", async (req, res) => {
       { upsert: true, new: true }
     );
 
-
-    res.redirect("http://localhost:5173/app/schedule?linked=true");
+    // Redirect to the production frontend URL
+    res.redirect(`${process.env.FRONTEND_URL}/app/schedule?linked=true`);
   } catch (err) {
+    console.error("OAuth callback error:", err?.response?.data || err.message);
     res.status(500).send("OAuth failed");
   }
 });

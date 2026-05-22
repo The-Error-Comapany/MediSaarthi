@@ -5,7 +5,7 @@ import { OAuth2Client } from "google-auth-library";
 import { resHandler } from "../utils/resHandler.js";
 import { generateAccessAndRefreshTokens } from "./user.controller.js";
 
-const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+const client = new OAuth2Client(process.env.CLIENT_ID);
 
 export const googleLogin = asyncCreator(async (req, res) => {
   const { credential } = req.body; // ID token from frontend
@@ -17,7 +17,7 @@ export const googleLogin = asyncCreator(async (req, res) => {
   // Verify token with Google
   const ticket = await client.verifyIdToken({
     idToken: credential,
-    audience: process.env.GOOGLE_CLIENT_ID,
+    audience: process.env.CLIENT_ID,
   });
 
   const payload = ticket.getPayload();
@@ -48,8 +48,8 @@ export const googleLogin = asyncCreator(async (req, res) => {
 
   const cookieOptions = {
     httpOnly: true,
-    secure: false, 
-    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
   };
 
   return res

@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/server.js"
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/v1/cron/medication-reminders",
+      "schedule": "* * * * *"
+    },
+    {
+      "path": "/api/v1/cron/cleanup-users",
+      "schedule": "0 */6 * * *"
+    },
+    {
+      "path": "/api/v1/cron/mark-missed-doses",
+      "schedule": "5 0 * * *"
+    }
+  ]
+}

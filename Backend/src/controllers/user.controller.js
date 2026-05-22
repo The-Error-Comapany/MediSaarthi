@@ -84,8 +84,8 @@ const verifyEmailOtp = asyncCreator(async (req, res) => {
 
   const cookieOptions = {
     httpOnly: true,
-    secure: false,    
-    sameSite: "lax",   
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
   };
 
   return res
@@ -145,8 +145,8 @@ const loginUser = asyncCreator(async (req, res) => {
   // utils/cookieOptions.js
   const options = {
     httpOnly: true,
-    secure: false,    
-    sameSite: "lax",  
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
   };
 
 
@@ -223,8 +223,8 @@ const logoutUser = asyncCreator(async (req, res) => {
 
   const option = {
     httpOnly: true,
-    secure: false,    
-    sameSite: "lax",  
+    secure: process.env.NODE_ENV === "production",
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
   };
 
 
@@ -261,8 +261,8 @@ const refreshAccessToken = asyncCreator(async (req, res) => {
 
     const cookieOptions = {
       httpOnly: true,
-      secure: false,
-      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
     };
 
     return res

@@ -15,6 +15,7 @@ import reportRoutes from "./routes/reports.routes.js";
 import predictionRoutes from "./routes/prediction.routes.js";
 import globalErrorHandler from './middleware/globalErrorHandler.middleware.js';
 import authRoutes from "./routes/auth.routes.js";
+import cronRoutes from "./routes/cron.routes.js";
 
 
 const app = express();
@@ -25,7 +26,7 @@ app.use(express.static("public"));
 app.use(cookieParser());
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: process.env.FRONTEND_URL,
   credentials: true,
 }));
 
@@ -38,6 +39,7 @@ app.use("/api/v1/doselog", doseLogRoutes);
 app.use("/api/v1/dashboard", dashboardRoutes);
 app.use("/api/v1/reports", reportRoutes);
 app.use("/api/v1/prediction", predictionRoutes);
+app.use("/api/v1/cron", cronRoutes);
 
 app.use(globalErrorHandler);
 

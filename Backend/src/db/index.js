@@ -2,9 +2,6 @@
 import mongoose from "mongoose";
 import {DB_NAME} from "../db/constant.js";
 
-import express from "express";
-const app = express();
-
 const connectDB = async ()=>{
     try{
         const connectionInstance = await mongoose.connect(`${process.env.MONGODB_URL}/${DB_NAME}`); //for connection
