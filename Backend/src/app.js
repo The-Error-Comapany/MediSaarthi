@@ -25,10 +25,31 @@ app.use(urlencoded({ limit: "16kb", extended: true }));
 app.use(express.static("public"));
 app.use(cookieParser());
 
-app.use(cors({
-  origin: process.env.FRONTEND_URL,
-  credentials: true,
-}));
+// Parse comma-separated FRONTEND_URL list, e.g.:
+// FRONTEND_URL=https://medisaarthi.vercel.app,https://medisaarthi-six.vercel.app
+const allowedOrigins = (process.env.FRONTEND_URL || "")
+  .split(",")
+  .map((o) => o.trim())
+  .filter(Boolean);
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow requests with no origin (curl, Postman, server-to-server)
+      if (!origin) return callback(null, true);
+
+      // Allow any Vercel preview URL for this project
+      const isVercelPreview = /^https:\/\/medisaarthi.*\.vercel\.app$/.test(origin);
+
+      if (allowedOrigins.includes(origin) || isVercelPreview) {
+        return callback(null, true);
+      }
+
+      return callback(new Error(`CORS: origin ${origin} not allowed`));
+    },
+    credentials: true,
+  })
+);
 
 app.use("/api/v1/calendar", calendarRoutes);
 app.use("/api/v1/medications", medicationRouter);
