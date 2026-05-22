@@ -5,7 +5,7 @@ import {
   getValidAccessToken,
   createMedicineEvents,
   deleteMedicineEvents,
-} from "../controllers/calendar.controller.js";
+} from "../controllers/calendar.contoller.js"
 import { sendEmail } from "../utils/mailer.js";
 
 export const createMedication = asyncCreator(async (req, res) => {
