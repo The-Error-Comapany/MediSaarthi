@@ -1,3 +1,4 @@
+import React from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import "./horizonntalLayout.css"
 import Header from "./header";
