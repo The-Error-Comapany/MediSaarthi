@@ -314,30 +314,61 @@ body {
 @media (max-width: 768px) {
   .auth-container {
     flex-direction: column;
-    height: auto;
     width: 92%;
+    max-width: 400px;
+    min-height: 730px;
   }
 
-  .forms-container,
-  .intros-container {
-    width: 100%;
-    height: auto;
+  .forms-container {
     position: relative;
+    width: 100%;
+    height: 480px;
+    min-height: 480px;
+  }
+
+  .intros-container {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    min-height: 250px;
+    border-left: none;
+    border-top: 1px solid rgba(255,255,255,0.08);
   }
 
   .auth-form {
-    position: relative;
-    width: 100%;
+    width: 90%;
+    left: 5%;
   }
 
-  .signin-form,
+  .signin-form {
+    transform: translate(0, -50%);
+  }
   .signup-form {
-    left: 0 !important;
-    opacity: 1 !important;
+    transform: translate(120%, -50%);
+  }
+  .auth-container.change .signin-form {
+    transform: translate(-120%, -50%);
+  }
+  .auth-container.change .signup-form {
+    transform: translate(0, -50%);
   }
 
   .intro-control {
-    position: relative;
-    padding: 30px;
+    padding: 20px;
+    top: 50%;
+    left: 0;
+  }
+
+  .signin-intro {
+    transform: translate(0, -50%);
+  }
+  .signup-intro {
+    transform: translate(100%, -50%);
+  }
+  .auth-container.change .signin-intro {
+    transform: translate(-100%, -50%);
+  }
+  .auth-container.change .signup-intro {
+    transform: translate(0, -50%);
   }
 }

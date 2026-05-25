@@ -169,6 +169,61 @@ const Reports = () => {
     </div>
   );
 };
+
+const pieOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      position: "bottom",
+      labels: {
+        color: "#cbd5e1",
+        padding: 16,
+        font: { family: "'Inter', sans-serif", size: 12, weight: "600" }
+      }
+    },
+    tooltip: {
+      backgroundColor: "rgba(15,15,15,0.95)",
+      titleFont: { family: "'Inter', sans-serif", weight: "700", size: 12 },
+      bodyFont: { family: "'Inter', sans-serif", size: 12 },
+      borderColor: "rgba(255,255,255,0.08)",
+      borderWidth: 1,
+      cornerRadius: 12
+    }
+  }
+};
+
+const scaleOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: {
+      labels: {
+        color: "#cbd5e1",
+        font: { family: "'Inter', sans-serif", size: 12, weight: "600" }
+      }
+    },
+    tooltip: {
+      backgroundColor: "rgba(15,15,15,0.95)",
+      titleFont: { family: "'Inter', sans-serif", weight: "700", size: 12 },
+      bodyFont: { family: "'Inter', sans-serif", size: 12 },
+      borderColor: "rgba(255,255,255,0.08)",
+      borderWidth: 1,
+      cornerRadius: 12
+    }
+  },
+  scales: {
+    x: {
+      grid: { color: "rgba(255,255,255,0.04)", drawBorder: false },
+      ticks: { color: "#64748b", font: { family: "'Inter', sans-serif", size: 10 } }
+    },
+    y: {
+      grid: { color: "rgba(255,255,255,0.04)", drawBorder: false },
+      ticks: { color: "#64748b", font: { family: "'Inter', sans-serif", size: 10 } }
+    }
+  }
+};
+
 const Weekly = ({ data, weekStart, setPopup }) => {
   const days = Array.from({ length: 7 }, (_, i) =>
     addDays(weekStart, i)
@@ -189,62 +244,76 @@ const Weekly = ({ data, weekStart, setPopup }) => {
 
   return (
     <>
-      <div className="card">
+      <div className="card chart-card-radial">
         <h3>Weekly Adherence</h3>
-        <Pie
-          data={{
-            labels:["Taken","Missed"],
-            datasets:[{
-              data:[totalTaken,totalMissed],
-              backgroundColor:["#16a34a","#dc2626"],
-              hoverBackgroundColor:["#15803d","#b91c1c"]
-            }]
-          }}
-        />
-        <p className="percent">
-          Adherence: {Math.round((totalTaken/(totalTaken+totalMissed))*100)}%
+        <div className="chart-canvas-wrapper" style={{ height: "240px", position: "relative" }}>
+          <Pie
+            options={pieOptions}
+            data={{
+              labels:["Taken","Missed"],
+              datasets:[{
+                data:[totalTaken,totalMissed],
+                backgroundColor:["#22d3ee","#f43f5e"],
+                hoverBackgroundColor:["#06b6d4","#e11d48"],
+                borderWidth: 0
+              }]
+            }}
+          />
+        </div>
+        <p className="percent mt-3">
+          Adherence: <span className="glow-text">{Math.round((totalTaken/(totalTaken+totalMissed))*100)}%</span>
         </p>
       </div>
 
       <div className="card">
         <h3>Daily Medication Activity</h3>
-        <Line
-          data={{
-            labels: days.map(d =>
-              d.toLocaleDateString("en-IN", { weekday:"short", day:"2-digit" })
-            ),
-            datasets:[
-              {
-                label:"Taken",
-                data:days.map(d=>daily[dateKey(d)].taken.length),
-                borderColor:"#16a34a",
-                backgroundColor:"#16a34a",
-                tension:0.4
-              },
-              {
-                label:"Missed",
-                data:days.map(d=>daily[dateKey(d)].missed.length),
-                borderColor:"#dc2626",
-                backgroundColor:"#dc2626",
-                tension:0.4
+        <div className="chart-canvas-wrapper" style={{ height: "240px", position: "relative" }}>
+          <Line
+            options={{
+              ...scaleOptions,
+              onClick:(_,els)=>{
+                if(!els.length) return;
+                const d = days[els[0].index];
+                setPopup({
+                  title: d.toDateString(),
+                  body: formatDayDetails(daily[dateKey(d)])
+                });
               }
-            ]
-          }}
-          options={{
-            onClick:(_,els)=>{
-              if(!els.length) return;
-              const d = days[els[0].index];
-              setPopup({
-                title: d.toDateString(),
-                body: formatDayDetails(daily[dateKey(d)])
-              });
-            }
-          }}
-        />
+            }}
+            data={{
+              labels: days.map(d =>
+                d.toLocaleDateString("en-IN", { weekday:"short", day:"2-digit" })
+              ),
+              datasets:[
+                {
+                  label:"Taken",
+                  data:days.map(d=>daily[dateKey(d)].taken.length),
+                  borderColor:"#22d3ee",
+                  backgroundColor:"rgba(34, 211, 238, 0.1)",
+                  tension:0.4,
+                  fill: true,
+                  pointBackgroundColor: "#22d3ee",
+                  pointHoverRadius: 6
+                },
+                {
+                  label:"Missed",
+                  data:days.map(d=>daily[dateKey(d)].missed.length),
+                  borderColor:"#f43f5e",
+                  backgroundColor:"rgba(244, 63, 94, 0.1)",
+                  tension:0.4,
+                  fill: true,
+                  pointBackgroundColor: "#f43f5e",
+                  pointHoverRadius: 6
+                }
+              ]
+            }}
+          />
+        </div>
       </div>
     </>
   );
 };
+
 const Monthly = ({ data, monthDate, setPopup }) => {
   const days = getMonthDays(monthDate);
 
@@ -253,33 +322,35 @@ const Monthly = ({ data, monthDate, setPopup }) => {
   }
 
   return (
-    <div className="card">
+    <div className="card col-12">
       <h3>Monthly Performance</h3>
-      <Bar
-        data={{
-          labels: days,
-          datasets: [
-            {
-              label: "Taken",
-              data: days.map(d => data.daily[d]?.taken.length || 0),
-
-              backgroundColor: "green",
-
-              borderRadius: 6
+      <div className="chart-canvas-wrapper" style={{ height: "280px", position: "relative" }}>
+        <Bar
+          options={{
+            ...scaleOptions,
+            onClick: (_, els) => {
+              if (!els.length) return;
+              const d = days[els[0].index];
+              setPopup({
+                title: `Details for ${d}`,
+                body: formatDayDetails(data.daily[d])
+              });
             }
-          ]
-        }}
-        options={{
-          onClick: (_, els) => {
-            if (!els.length) return;
-            const d = days[els[0].index];
-            setPopup({
-              title: `Details for ${d}`,
-              body: formatDayDetails(data.daily[d])
-            });
-          }
-        }}
-      />
+          }}
+          data={{
+            labels: days.map(d => d.split("-")[2]), // Day number only for clean layout
+            datasets: [
+              {
+                label: "Taken",
+                data: days.map(d => data.daily[d]?.taken.length || 0),
+                backgroundColor: "#22d3ee",
+                borderRadius: 4,
+                borderWidth: 0
+              }
+            ]
+          }}
+        />
+      </div>
     </div>
   );
 };
@@ -293,43 +364,51 @@ const History = ({ data }) => {
     <>
       <div className="card">
         <h3>Monthly Adherence Trend</h3>
-        <Line
-          data={{
-            labels: Object.keys(data.monthlyAdherence),
-            datasets: [
-              {
-                label: "Adherence %",
-                data: Object.values(data.monthlyAdherence),
-                borderColor: "#0ea5e9",
-                backgroundColor: "#0ea5e9",
-                tension: 0.4,
-              },
-            ],
-          }}
-        />
+        <div className="chart-canvas-wrapper" style={{ height: "240px", position: "relative" }}>
+          <Line
+            options={scaleOptions}
+            data={{
+              labels: Object.keys(data.monthlyAdherence),
+              datasets: [
+                {
+                  label: "Adherence %",
+                  data: Object.values(data.monthlyAdherence),
+                  borderColor: "#22d3ee",
+                  backgroundColor: "rgba(34, 211, 238, 0.1)",
+                  tension: 0.4,
+                  fill: true,
+                  pointBackgroundColor: "#22d3ee"
+                },
+              ],
+            }}
+          />
+        </div>
       </div>
 
       <div className="card">
         <h3>Yearly Adherence Trend</h3>
-        <Line
-          data={{
-            labels: Object.keys(data.yearlyAdherence),
-            datasets: [
-              {
-                label: "Adherence %",
-                data: Object.values(data.yearlyAdherence),
-                borderColor: "#9333ea",
-                backgroundColor: "#9333ea",
-                tension: 0.4,
-              },
-            ],
-          }}
-        />
+        <div className="chart-canvas-wrapper" style={{ height: "240px", position: "relative" }}>
+          <Line
+            options={scaleOptions}
+            data={{
+              labels: Object.keys(data.yearlyAdherence),
+              datasets: [
+                {
+                  label: "Adherence %",
+                  data: Object.values(data.yearlyAdherence),
+                  borderColor: "#a855f7",
+                  backgroundColor: "rgba(168, 85, 247, 0.1)",
+                  tension: 0.4,
+                  fill: true,
+                  pointBackgroundColor: "#a855f7"
+                },
+              ],
+            }}
+          />
+        </div>
       </div>
     </>
   );
 };
-
-
 
 export default Reports;

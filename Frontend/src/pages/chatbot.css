@@ -2,7 +2,7 @@
 
 /* ===== PAGE ===== */
 .chatbot-page {
-  max-width: 900px;
+  max-width: 860px;
   margin: auto;
   padding: 24px;
   font-family: "Inter", sans-serif;
@@ -31,7 +31,7 @@
   padding: 24px;
   display: flex;
   flex-direction: column;
-  height: 600px;
+  height: 650px;
 }
 
 /* ===== CHAT WINDOW ===== */
@@ -141,4 +141,54 @@
 
 .chatbot-fab:hover {
   transform: scale(1.1);
+}
+
+/* ================= MOBILE VIEWPORT OVERRIDES ================= */
+@media (max-width: 576px) {
+  .chatbot-page {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100vh - 120px);
+  }
+
+  .chatbot-title {
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  .chatbot-card {
+    padding: 16px;
+    height: 480px !important;
+    border-radius: 16px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .chat-bubble {
+    font-size: 0.85rem;
+    padding: 10px 14px;
+    max-width: 85%;
+  }
+
+  .chat-input {
+    gap: 8px;
+  }
+
+  .chat-input .form-control {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+    height: 40px;
+  }
+
+  .btn-send {
+    padding: 8px 18px;
+    font-size: 0.85rem;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }

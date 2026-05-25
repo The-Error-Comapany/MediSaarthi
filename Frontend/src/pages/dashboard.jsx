@@ -12,7 +12,18 @@ const getWeekStart = (dateStr) => {
   d.setHours(0, 0, 0, 0);
   return d.toISOString().split("T");
 };
-
+const getWeekDays = (dateStr) => {
+  const current = new Date(dateStr);
+  const sunday = new Date(current);
+  const day = current.getDay();
+  sunday.setDate(current.getDate() - day);
+  
+  return Array.from({ length: 7 }, (_, i) => {
+    const d = new Date(sunday);
+    d.setDate(sunday.getDate() + i);
+    return d;
+  });
+};
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -181,21 +192,56 @@ useEffect(() => {
     return "bg-secondary";
   };
 
+  const weekDays = getWeekDays(selectedDate);
+
   return (
     <div className="container py-4" id="dashboardContent">
-      {/* Header */}
-      <div className="dashboard-header d-flex justify-content-between align-items-center">
-        <h1 className="h1">Hi, {user?.name || "User"}</h1>
-        <div className="d-flex align-items-center gap-3">
-          <input
-            type="date"
-            className="form-control"
-            style={{ maxWidth: "200px" }}
-            value={selectedDate}
-            onChange={(e) => setSelectedDate(e.target.value)}
-          />
-          <button className="btn btn-add" onClick={() => navigate("/app/schedule")}>
-            <i className="bi bi-plus-circle me-1"></i> Add New Medicine
+      {/* 🌟 Premium Integrated Welcome Header */}
+      <div className="welcome-banner p-4 mb-4">
+        <div className="d-flex justify-content-between align-items-center flex-wrap gap-4">
+          <div className="welcome-left">
+            <span className="welcome-tag">HEALTH INSIGHTS</span>
+            <h1 className="welcome-title mt-1">Hi, {user?.name || "User"}</h1>
+            <p className="welcome-desc mt-1">
+              Your adherence score is at <strong className="glow-text">{stats.adherence}%</strong> this week.
+            </p>
+          </div>
+          
+          <div className="welcome-right d-flex align-items-center gap-3">
+            <div className="adherence-ring-box">
+              <svg className="adherence-ring" viewBox="0 0 80 80">
+                <circle className="ring-track" cx="40" cy="40" r="34" />
+                <circle
+                  className="ring-progress"
+                  cx="40"
+                  cy="40"
+                  r="34"
+                  strokeDasharray={`${2 * Math.PI * 34}`}
+                  strokeDashoffset={`${2 * Math.PI * 34 * (1 - (stats.adherence || 0) / 100)}`}
+                />
+                <text x="50%" y="55%" className="ring-percentage" textAnchor="middle">
+                  {stats.adherence}%
+                </text>
+              </svg>
+            </div>
+            <div className="stats-mini-summary d-none d-sm-block">
+              <div className="mini-item">
+                <span className="mini-label">Doses Taken</span>
+                <span className="mini-val taken">{stats.taken}</span>
+              </div>
+              <div className="mini-item mt-1">
+                <span className="mini-label">Doses Missed</span>
+                <span className="mini-val missed">{stats.missed}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Seamless Navigation Button inside Greeting */}
+        <div className="banner-footer-action mt-3 pt-3 border-top border-secondary border-opacity-10 d-flex justify-content-between align-items-center">
+          <span className="action-text text-muted">Weekly Summary Status</span>
+          <button className="btn-detailed-report" onClick={() => navigate("/app/reports")}>
+            <i className="bi bi-bar-chart-fill me-2"></i> View Detailed Report
           </button>
         </div>
       </div>
@@ -203,103 +249,204 @@ useEffect(() => {
       {/* 🔮 AI Prediction Banner */}
       {aiSummary && (
         <div
-          className={`ai-summary-card ${aiSummary.overallRisk}`}
+          className={`ai-summary-card ${aiSummary.overallRisk} mb-4`}
           onClick={() => navigate("/app/ai-report")}
         >
           <div className="d-flex justify-content-between align-items-center">
-            <div>
-              <strong>⚡ AI Prediction Summary</strong>
-              <div className="mt-1">{aiSummary.message}</div>
+            <div className="d-flex align-items-center gap-2">
+              <span className="ai-icon">⚡</span>
+              <div>
+                <strong>AI Adherence Prediction</strong>
+                <div className="ai-msg text-muted mt-0.5">{aiSummary.message}</div>
+              </div>
             </div>
-            <i className="bi bi-chevron-right"></i>
+            <i className="bi bi-chevron-right text-primary"></i>
           </div>
         </div>
       )}
 
-
-      {/* Stats & Doses */}
-      <div className="row g-4">
-        <div className="col-md-4">
-          <div className="card card-adherence text-center">
-            <h5 className="card-title">Weekly Adherence</h5>
-            <div className="adherence-score">{stats.adherence}%</div>
-            <p className="mb-3">
-              {stats.taken}/{stats.taken + stats.missed} doses taken
-            </p>
-            <button
-              className="btn btn-link"
-              onClick={() => navigate("/app/reports")}
-            >
-              <i className="bi bi-bar-chart-fill me-2"></i> View Detailed Report
+      {/* Row containing left column (Weekly Timeline Calendar) and right column (Doses Timeline) for Laptop & Tablet grids */}
+      {/* 📅 Full-Width Premium Week Calendar Strip & Date Picker Row */}
+      <div className="calendar-strip-section p-4 mb-4 glass-panel">
+        <div className="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-3">
+          <h5 className="section-subtitle mb-0">
+            <i className="bi bi-calendar-week me-2 text-primary"></i> Timeline Calendar
+          </h5>
+          <div className="d-flex align-items-center gap-2 flex-wrap">
+            <input
+              type="date"
+              className="form-control form-control-sm elegant-datepicker me-2"
+              style={{ width: "160px" }}
+              value={selectedDate}
+              onChange={(e) => setSelectedDate(e.target.value)}
+            />
+            <button className="btn-add-med-pill" onClick={() => navigate("/app/schedule")}>
+              <i className="bi bi-plus-lg me-1"></i> Add Medication
             </button>
           </div>
         </div>
 
-        <div className="col-md-8">
-          <div className="card card-doses">
-            <h5>
-              <i className="bi bi-calendar-event me-2 text-primary"></i>
-              Doses for {selectedDate}
-            </h5>
+        {/* The 7-Day Interactive Row */}
+        <div className="week-strip d-flex justify-content-between gap-2 overflow-auto py-2">
+          {weekDays.map((day) => {
+            const dStr = day.toISOString().split("T")[0];
+            const isSelected = dStr === selectedDate;
+            const isToday = day.toDateString() === new Date().toDateString();
+            const dayNum = day.getDate();
+            const dayName = day.toLocaleDateString("en-US", { weekday: "short" });
+            
+            return (
+              <button
+                key={dStr}
+                className={`week-day-btn flex-grow-1 ${isSelected ? "active" : ""} ${isToday ? "today" : ""}`}
+                style={{ minWidth: "55px", maxWidth: "100px" }}
+                onClick={() => setSelectedDate(dStr)}
+              >
+                <span className="week-day-name">{dayName}</span>
+                <span className="week-day-number">{dayNum}</span>
+                {isToday && <span className="today-dot"></span>}
+              </button>
+            );
+          })}
+        </div>
+      </div>
 
-            {loading ? (
-              <p className="text-muted">Loading your schedule...</p>
-            ) : filteredDoses.length === 0 ? (
-              <p className="text-muted mt-3">
-                No medicines scheduled for this date.
-              </p>
-            ) : (
-              filteredDoses.flatMap((dose) =>
+      {/* 💊 Full-Width Premium Grid of Doses */}
+      <div className="doses-section glass-panel p-4 mb-4">
+        <h5 className="section-subtitle mb-4">
+          <i className="bi bi-activity me-2 text-success"></i> Doses for {selectedDate}
+        </h5>
+
+        {loading ? (
+          <div className="d-flex align-items-center gap-2 text-muted justify-content-center py-5">
+            <span className="spinner-border spinner-border-sm" role="status"></span>
+            <span>Loading schedule...</span>
+          </div>
+        ) : filteredDoses.length === 0 ? (
+          <div className="text-center text-muted py-5 empty-timeline">
+            <i className="bi bi-shield-check fs-1 text-opacity-30 text-success d-block mb-3"></i>
+            <span>No medicines scheduled for this date.</span>
+          </div>
+        ) : (
+          <>
+            {/* 🖥️ LAPTOP & TABLET VIEW: Premium Card Grid */}
+            <div className="d-none d-md-grid doses-grid">
+              {filteredDoses.flatMap((dose) =>
                 dose.times.map((time) => {
                   const doseStatus = getDoseStatus(dose._id, time);
                   const key = `${dose._id}-${time}`;
-
+                  const isTaken = doseStatus === "taken";
+                  const isMissed = doseStatus === "missed";
+                  const displayStatus = doseStatus ? doseStatus.toUpperCase() : "PENDING";
+                  
                   return (
-                    <div
-                      key={key}
-                      className="dose-item d-flex justify-content-between align-items-center"
-                    >
-                      <div>
-                        <strong>
-                          {dose.name} ({dose.dosage})
-                        </strong>
-                        <br />
-                        <span className="time text-muted">
+                    <div key={key} className={`dose-card ${doseStatus || "pending"}`}>
+                      <div className="dose-card-header">
+                        <span className="dose-time-badge">
                           <i className="bi bi-clock me-1"></i> {time}
                         </span>
+                        <span className={`dose-status-label ${doseStatus || "pending"}`}>
+                          {displayStatus}
+                        </span>
                       </div>
-                      <div className="dose-actions">
+
+                      <div className="dose-card-body">
+                        <div className="dose-med-icon-box">
+                          <i className="bi bi-capsule"></i>
+                        </div>
+                        <div className="dose-med-info">
+                          <h4 className="dose-med-title">{dose.name}</h4>
+                          <span className="dose-qty-tag">{dose.dosage}</span>
+                        </div>
+                      </div>
+                      
+                      <div className="dose-card-actions">
                         <button
-                          className={`badge ${getButtonClass(doseStatus, "taken")}`}
+                          className={`dose-action-btn check-btn ${isTaken ? "active" : ""}`}
                           disabled={logging[key]}
-                          onClick={() =>
-                            handleDoseLog(dose._id, time, "taken")
-                          }
+                          onClick={() => handleDoseLog(dose._id, time, "taken")}
+                          title="Mark as Taken"
                         >
-                          <i className="bi bi-check-circle me-1"></i> Taken
+                          <i className="bi bi-check-circle-fill me-2"></i>
+                          <span>Taken</span>
                         </button>
                         <button
-                          className={`badge ${getButtonClass(doseStatus, "missed")}`}
+                          className={`dose-action-btn cross-btn ${isMissed ? "active" : ""}`}
                           disabled={logging[key]}
-                          onClick={() =>
-                            handleDoseLog(dose._id, time, "missed")
-                          }
+                          onClick={() => handleDoseLog(dose._id, time, "missed")}
+                          title="Mark as Missed"
                         >
-                          <i className="bi bi-x-circle me-1"></i> Missed
+                          <i className="bi bi-x-circle-fill me-2"></i>
+                          <span>Missed</span>
                         </button>
                       </div>
                     </div>
                   );
                 })
-              )
-            )}
-          </div>
-        </div>
+              )}
+            </div>
 
-        <div>
-          <ChatBotIcon />
-        </div>
+            {/* 📱 MOBILE VIEW: Connected Vertical Timeline (ONLY for screens < 768px) */}
+            <div className="d-block d-md-none timeline-track-wrapper">
+              <div className="timeline-vertical-line"></div>
+              
+              {filteredDoses.flatMap((dose) =>
+                dose.times.map((time) => {
+                  const doseStatus = getDoseStatus(dose._id, time);
+                  const key = `${dose._id}-${time}`;
+                  const isTaken = doseStatus === "taken";
+                  const isMissed = doseStatus === "missed";
+                  
+                  return (
+                    <div key={key} className={`timeline-node-row ${doseStatus || "pending"}`}>
+                      {/* Glowing status circle node */}
+                      <div className="timeline-node-point">
+                        <div className="timeline-node-glow"></div>
+                        <div className="timeline-node-dot"></div>
+                      </div>
+
+                      {/* Timeline Card details */}
+                      <div className="timeline-node-card d-flex justify-content-between align-items-center">
+                        <div className="node-info">
+                          <div className="node-med-title">{dose.name}</div>
+                          <div className="node-med-details text-muted mt-1">
+                            <span className="qty-tag me-2">{dose.dosage}</span>
+                            <span className="time-tag"><i className="bi bi-clock me-1"></i> {time}</span>
+                          </div>
+                        </div>
+                        
+                        {/* Responsive Mini Actions */}
+                        <div className="node-actions-strip d-flex gap-2">
+                          <button
+                            className={`node-badge-btn check-btn ${isTaken ? "active" : ""}`}
+                            disabled={logging[key]}
+                            onClick={() => handleDoseLog(dose._id, time, "taken")}
+                            title="Mark as Taken"
+                          >
+                            <i className="bi bi-check-lg"></i>
+                            <span className="ms-1">Taken</span>
+                          </button>
+                          <button
+                            className={`node-badge-btn cross-btn ${isMissed ? "active" : ""}`}
+                            disabled={logging[key]}
+                            onClick={() => handleDoseLog(dose._id, time, "missed")}
+                            title="Mark as Missed"
+                          >
+                            <i className="bi bi-x-lg"></i>
+                            <span className="ms-1">Missed</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })
+              )}
+            </div>
+          </>
+        )}
       </div>
+
+      <ChatBotIcon />
     </div>
   );
 };

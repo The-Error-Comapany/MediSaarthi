@@ -352,3 +352,694 @@ body {
 .ai-summary-card.low {
   border-left: 4px solid #28a745;
 }
+
+/* ================= PREMIUM DASHBOARD OVERHAUL ================= */
+.welcome-banner {
+  background: linear-gradient(135deg, rgba(20,20,20,0.85), rgba(15,15,15,0.95)) !important;
+  backdrop-filter: blur(24px);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 
+    0 20px 50px rgba(0,0,0,0.7),
+    inset 0 1px 1px rgba(255,255,255,0.1);
+}
+
+.welcome-tag {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  font-weight: 800;
+  color: #22d3ee;
+  text-transform: uppercase;
+}
+
+.welcome-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #f8fafc !important;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.welcome-desc {
+  font-size: 0.95rem;
+  color: #94a3b8;
+}
+
+.glow-text {
+  color: #22d3ee;
+  text-shadow: 0 0 15px rgba(34, 211, 238, 0.5);
+}
+
+/* --- SVG circular progress ring --- */
+.adherence-ring-box {
+  width: 76px;
+  height: 76px;
+}
+
+.adherence-ring {
+  width: 100%;
+  height: 100%;
+}
+
+.ring-track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.05);
+  stroke-width: 6;
+}
+
+.ring-progress {
+  fill: none;
+  stroke: #22d3ee;
+  stroke-width: 6;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  transition: stroke-dashoffset 0.6s ease;
+  filter: drop-shadow(0 0 4px rgba(34, 211, 238, 0.6));
+}
+
+.ring-percentage {
+  fill: #fff;
+  font-size: 1.1rem;
+  font-weight: 800;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.05em;
+}
+
+.stats-mini-summary {
+  border-left: 1px solid rgba(255,255,255,0.08);
+  padding-left: 16px;
+}
+
+.mini-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.mini-label {
+  font-size: 0.7rem;
+  color: #64748b;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.mini-val {
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.mini-val.taken { color: #10b981; }
+.mini-val.missed { color: #f43f5e; }
+
+.btn-detailed-report {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #cbd5e1;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-detailed-report:hover {
+  background: #f8fafc;
+  color: #0f172a;
+  border-color: #f8fafc;
+  box-shadow: 0 10px 20px rgba(255,255,255,0.1);
+}
+
+/* --- Glassmorphic borderless panels --- */
+.glass-panel {
+  background: rgba(20,20,20,0.7) !important;
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  border: 1px solid rgba(255,255,255,0.06) !important;
+  box-shadow: 
+    0 25px 60px rgba(0,0,0,0.65),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #e2e8f0;
+}
+
+/* --- Week strip calendar styling --- */
+.week-strip {
+  gap: 8px;
+}
+
+.week-day-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 62px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.02);
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.week-day-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #cbd5e1;
+  transform: translateY(-2px);
+}
+
+.week-day-name {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.week-day-number {
+  font-size: 1.05rem;
+  font-weight: 800;
+  margin-top: 2px;
+}
+
+.week-day-btn.active {
+  background: linear-gradient(135deg, #22d3ee, #10b981) !important;
+  border-color: transparent;
+  color: #020617 !important;
+  font-weight: 700;
+  box-shadow: 
+    0 10px 20px rgba(34, 211, 238, 0.35),
+    inset 0 1px 0 rgba(255,255,255,0.25);
+  transform: scale(1.08) translateY(-4px);
+}
+
+.today-dot {
+  width: 4px;
+  height: 4px;
+  background: #22d3ee;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 8px;
+}
+
+.week-day-btn.active .today-dot {
+  background: #020617;
+}
+
+.elegant-datepicker {
+  background: rgba(15,15,15,0.7) !important;
+  color: #cbd5e1 !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  border-radius: 999px !important;
+  padding: 6px 14px !important;
+  font-size: 0.8rem !important;
+}
+
+.btn-add-med-pill {
+  background: linear-gradient(135deg, #22d3ee, #10b981);
+  color: #020617;
+  border: none;
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 6px 16px;
+  border-radius: 999px;
+  box-shadow: 0 4px 10px rgba(34, 211, 238, 0.3);
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.btn-add-med-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(34, 211, 238, 0.5);
+}
+
+/* ================= PREMIUM DOSES GRID ================= */
+.doses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  width: 100%;
+}
+
+.dose-card {
+  background: rgba(20, 20, 20, 0.75) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+
+.dose-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(34, 211, 238, 0.18) !important;
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.7),
+    0 0 30px rgba(34, 211, 238, 0.12);
+}
+
+/* Card Accent Left Borders based on status */
+.dose-card.taken {
+  border-left: 4px solid #10b981 !important;
+}
+
+.dose-card.missed {
+  border-left: 4px solid #f43f5e !important;
+}
+
+.dose-card.pending {
+  border-left: 4px solid #3b82f6 !important;
+}
+
+/* Header */
+.dose-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-bottom: 10px;
+}
+
+.dose-time-badge {
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.dose-time-badge i {
+  color: #22d3ee;
+}
+
+.dose-status-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.05em;
+}
+
+.dose-status-label.taken {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.dose-status-label.missed {
+  background: rgba(244, 63, 94, 0.1);
+  color: #f43f5e;
+  border: 1px solid rgba(244, 63, 94, 0.2);
+}
+
+.dose-status-label.pending {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+/* Body */
+.dose-card-body {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 22px;
+  flex-grow: 1;
+}
+
+.dose-med-icon-box {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: #22d3ee;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.dose-med-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.dose-med-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #f8fafc !important;
+  margin: 0;
+}
+
+.dose-qty-tag {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+/* Actions styling - side by side capsules */
+.dose-card-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.dose-action-btn {
+  flex: 1;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  color: #64748b;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.dose-action-btn:hover {
+  transform: translateY(-2px);
+  color: #fff;
+}
+
+.dose-action-btn.check-btn:hover,
+.dose-action-btn.check-btn.active {
+  background: rgba(16, 185, 129, 0.12) !important;
+  border-color: #10b981 !important;
+  color: #10b981 !important;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+}
+
+.dose-action-btn.cross-btn:hover,
+.dose-action-btn.cross-btn.active {
+  background: rgba(244, 63, 94, 0.12) !important;
+  border-color: #f43f5e !important;
+  color: #f43f5e !important;
+  box-shadow: 0 0 15px rgba(244, 63, 94, 0.2);
+}
+
+/* ================= MOBILE VIEWPORT CUSTOM OVERRIDES ================= */
+@media (max-width: 768px) {
+  .calendar-strip-section {
+    padding: 20px 16px !important;
+    border-radius: 20px !important;
+  }
+
+  .doses-section {
+    padding: 20px 16px !important;
+    border-radius: 20px !important;
+  }
+
+  .doses-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+}
+
+@media (max-width: 576px) {
+  .welcome-banner {
+    padding: 20px 16px !important;
+  }
+
+  .welcome-title {
+    font-size: 1.7rem !important;
+  }
+
+  .welcome-desc {
+    font-size: 0.85rem !important;
+  }
+
+  .adherence-ring-box {
+    width: 60px;
+    height: 60px;
+  }
+
+  .ring-percentage {
+    font-size: 1rem !important;
+  }
+
+  .btn-detailed-report {
+    width: 100%;
+    text-align: center;
+    padding: 10px !important;
+    font-size: 0.8rem !important;
+  }
+
+  .banner-footer-action {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch !important;
+  }
+
+  .banner-footer-action .action-text {
+    text-align: center;
+  }
+
+  .calendar-strip-section {
+    padding: 16px 12px !important;
+  }
+
+  .week-day-btn {
+    width: 38px;
+    height: 54px;
+    border-radius: 10px;
+  }
+
+  .week-day-name {
+    font-size: 0.6rem;
+  }
+
+  .week-day-number {
+    font-size: 0.95rem;
+  }
+
+  .doses-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .dose-card {
+    padding: 16px !important;
+    border-radius: 16px !important;
+  }
+
+  /* Connected Timeline for mobile */
+  .timeline-track-wrapper {
+    position: relative;
+    padding-left: 36px;
+    margin-top: 10px;
+  }
+
+  .timeline-vertical-line {
+    position: absolute;
+    left: 11px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: linear-gradient(to bottom, rgba(34,211,238,0.25) 0%, rgba(16,185,129,0.25) 100%);
+    border-left: 2px dashed rgba(255,255,255,0.08);
+  }
+
+  .timeline-node-row {
+    position: relative;
+    margin-bottom: 24px;
+  }
+
+  .timeline-node-row:last-child {
+    margin-bottom: 0;
+  }
+
+  .timeline-node-point {
+    position: absolute;
+    left: -36px;
+    top: 12px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+
+  .timeline-node-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #64748b;
+    border: 2px solid #050505;
+    transition: all 0.35s ease;
+  }
+
+  .timeline-node-glow {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    opacity: 0;
+    transition: all 0.35s ease;
+  }
+
+  /* Node row states */
+  .timeline-node-row.taken .timeline-node-dot {
+    background: #10b981;
+    border-color: #050505;
+  }
+
+  .timeline-node-row.taken .timeline-node-glow {
+    background: rgba(16,185,129,0.25);
+    opacity: 1;
+    animation: nodePulse 2s infinite;
+  }
+
+  .timeline-node-row.missed .timeline-node-dot {
+    background: #f43f5e;
+    border-color: #050505;
+  }
+
+  .timeline-node-row.missed .timeline-node-glow {
+    background: rgba(244,63,94,0.25);
+    opacity: 1;
+    animation: nodePulse 2s infinite;
+  }
+
+  .timeline-node-row.pending .timeline-node-dot {
+    background: #3b82f6;
+    border-color: #050505;
+  }
+
+  .timeline-node-row.pending .timeline-node-glow {
+    background: rgba(59,130,246,0.15);
+    opacity: 1;
+  }
+
+  @keyframes nodePulse {
+    0% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.4); opacity: 0; }
+    100% { transform: scale(1); opacity: 0.6; }
+  }
+
+  .timeline-node-card {
+    background: rgba(255,255,255,0.02) !important;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 18px;
+    padding: 12px 14px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .timeline-node-card:hover {
+    background: rgba(255,255,255,0.04) !important;
+    border-color: rgba(34, 211, 238, 0.15);
+    transform: translateX(4px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+
+  .node-med-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #f8fafc;
+  }
+
+  .qty-tag {
+    background: rgba(255,255,255,0.05);
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #cbd5e1;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .time-tag {
+    font-size: 0.8rem;
+    color: #64748b;
+  }
+
+  /* Timeline Action buttons */
+  .node-badge-btn {
+    padding: 0 !important;
+    width: 32px;
+    height: 32px;
+    border-radius: 50% !important;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.02);
+    color: #64748b;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .node-badge-btn span {
+    display: none !important; /* Hide text on mobile to prevent overlap entirely! */
+  }
+
+  .node-badge-btn:hover {
+    transform: scale(1.1);
+    color: #fff;
+  }
+
+  .node-badge-btn.check-btn:hover,
+  .node-badge-btn.check-btn.active {
+    background: rgba(16, 185, 129, 0.15) !important;
+    border-color: #10b981 !important;
+    color: #10b981 !important;
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.25);
+  }
+
+  .node-badge-btn.cross-btn:hover,
+  .node-badge-btn.cross-btn.active {
+    background: rgba(244, 63, 94, 0.15) !important;
+    border-color: #f43f5e !important;
+    color: #f43f5e !important;
+    box-shadow: 0 0 15px rgba(244, 63, 94, 0.25);
+  }
+
+  /* Attractive mobile styling for AI Prediction card */
+  .ai-summary-card {
+    background: linear-gradient(135deg, rgba(34, 211, 238, 0.12), rgba(16, 185, 129, 0.12)) !important;
+    border: 1px solid rgba(34, 211, 238, 0.3) !important;
+    box-shadow: 
+      0 8px 24px rgba(34, 211, 238, 0.15),
+      inset 0 1px 1px rgba(255, 255, 255, 0.05) !important;
+    border-radius: 16px !important;
+    padding: 16px 18px !important;
+  }
+  
+  .ai-summary-card strong {
+    color: #22d3ee !important;
+    font-size: 1.05rem !important;
+    text-shadow: 0 0 10px rgba(34, 211, 238, 0.4);
+  }
+  
+  .ai-summary-card .ai-icon {
+    font-size: 1.3rem !important;
+    display: inline-block;
+    animation: iconPulse 1.8s infinite ease-in-out;
+  }
+
+  @keyframes iconPulse {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 2px rgba(34, 211, 238, 0.2)); }
+    50% { transform: scale(1.25); filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.8)); }
+  }
+}

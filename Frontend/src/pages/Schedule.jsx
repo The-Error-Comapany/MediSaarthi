@@ -182,93 +182,111 @@ const Schedule = () => {
         </div>
       </div>
 
-      <div className="card p-4 mb-5 shadow-sm" id="medicine-form">
-        <h4 className="fw-bold mb-3">{editId ? "Edit Medicine" : "Add Medicine"}</h4>
+      <div className="medicine-form-container p-4 mb-5 shadow-sm" id="medicine-form">
+        <h4 className="form-premium-title mb-4">
+          <i className="bi bi-capsule-pill me-2 text-primary"></i>
+          {editId ? "Edit Medication Details" : "Add Medication Schedule"}
+        </h4>
         <form onSubmit={handleSubmit}>
-          <div className="row g-3">
+          <div className="row g-4">
             <div className="col-md-6">
-              <input type="text" name="name" placeholder="Medicine Name" className="form-control" value={formData.name} onChange={handleChange} required />
+              <div className="premium-input-group">
+                <i className="bi bi-activity input-icon"></i>
+                <input type="text" name="name" placeholder="Medicine Name" className="form-control premium-input" value={formData.name} onChange={handleChange} required />
+              </div>
             </div>
             <div className="col-md-6">
-              <input type="text" name="dosage" placeholder="Dosage" className="form-control" value={formData.dosage} onChange={handleChange} required />
+              <div className="premium-input-group">
+                <i className="bi bi-egg input-icon"></i>
+                <input type="text" name="dosage" placeholder="Dosage (e.g. 500mg, 1 pill)" className="form-control premium-input" value={formData.dosage} onChange={handleChange} required />
+              </div>
             </div>
             <div className="col-md-4">
-              <select name="frequency" className="form-select" value={formData.frequency} onChange={handleChange}>
-                <option value="daily">Daily</option>
-                <option value="weekly">Weekly</option>
-              </select>
+              <div className="premium-input-group">
+                <i className="bi bi-clock-history input-icon"></i>
+                <select name="frequency" className="form-select premium-select" value={formData.frequency} onChange={handleChange}>
+                  <option value="daily">Daily Frequency</option>
+                  <option value="weekly">Weekly Frequency</option>
+                </select>
+              </div>
             </div>
             <div className="col-md-8">
-              <input type="text" name="times"  required className="form-control" placeholder="Times (e.g. 08:00, 20:00)" value={formData.times} onChange={handleChange} />
+              <div className="premium-input-group">
+                <i className="bi bi-alarm input-icon"></i>
+                <input type="text" name="times" required className="form-control premium-input" placeholder="Times (comma-separated, e.g. 08:00, 20:00)" value={formData.times} onChange={handleChange} />
+              </div>
             </div>
             <div className="col-md-6">
-              <input
-                type="date"
-                name="startDate"
-                className="form-control"
-                value={formData.startDate}
-                onChange={handleChange}
-                min={today}
-                required
-              />
+              <div className="premium-input-group">
+                <i className="bi bi-calendar-event input-icon"></i>
+                <input
+                  type="date"
+                  name="startDate"
+                  className="form-control premium-input-date"
+                  value={formData.startDate}
+                  onChange={handleChange}
+                  min={today}
+                  required
+                />
+              </div>
             </div>
             <div className="col-md-6">
-              <input
-                type="date"
-                name="endDate"
-                className="form-control"
-                value={formData.endDate}
-                onChange={handleChange}
-                min={formData.startDate || today}
-                required
-              />
+              <div className="premium-input-group">
+                <i className="bi bi-calendar-x input-icon"></i>
+                <input
+                  type="date"
+                  name="endDate"
+                  className="form-control premium-input-date"
+                  value={formData.endDate}
+                  onChange={handleChange}
+                  min={formData.startDate || today}
+                  required
+                />
+              </div>
             </div>
-
-<div className="form-actions">
-  {editId && (
-    <button
-      type="button"
-      className="medicine-cancel-btn"
-      onClick={() => {
-        setEditId(null);
-        setFormData({
-          name: "",
-          dosage: "",
-          frequency: "daily",
-          times: "",
-          startDate: "",
-          endDate: "",
-        });
-      }}
-    >
-      Cancel
-    </button>
-  )}
-
-  <button
-    type="submit"
-    className={`medicine-save-btn ${loading ? "loading" : ""}`}
-    disabled={loading}
-  >
-    {loading ? (
-      <>
-        <span className="spinner"></span>
-        Saving
-      </>
-    ) : editId ? (
-      <>
-        <i className="bi bi-check2-circle"></i>
-        Update Medicine
-      </>
-    ) : (
-      <>
-        <i className="bi bi-plus-circle"></i>
-        Save Medicine
-      </>
-    )}
-  </button>
-</div>
-
+ 
+            <div className="form-actions-premium d-flex justify-content-end gap-3 mt-4">
+              {editId && (
+                <button
+                  type="button"
+                  className="premium-cancel-btn"
+                  onClick={() => {
+                    setEditId(null);
+                    setFormData({
+                      name: "",
+                      dosage: "",
+                      frequency: "daily",
+                      times: "",
+                      startDate: "",
+                      endDate: "",
+                    });
+                  }}
+                >
+                  <i className="bi bi-x-circle me-1"></i> Cancel
+                </button>
+              )}
+ 
+              <button
+                type="submit"
+                className={`premium-save-btn ${loading ? "loading" : ""}`}
+                disabled={loading}
+              >
+                {loading ? (
+                  <>
+                    <span className="spinner-border spinner-border-sm me-2" role="status"></span>
+                    Saving Schedule...
+                  </>
+                ) : editId ? (
+                  <>
+                    <i className="bi bi-check2-circle me-1"></i> Update Schedule
+                  </>
+                ) : (
+                  <>
+                    <i className="bi bi-plus-circle me-1"></i> Save Schedule
+                  </>
+                )}
+              </button>
+            </div>
           </div>
         </form>
       </div>
@@ -278,7 +296,7 @@ const Schedule = () => {
           <p className="text-center text-muted">No medications yet.</p>
         ) : (
           medications.map(med => (
-            <div className="col-md-6 col-lg-4" key={med._id}>
+            <div className="col-6 col-md-6 col-lg-4" key={med._id}>
               <div className="medicine-card">
                 <div className="card-header d-flex justify-content-between align-items-center">
                   <span>{med.name}</span>

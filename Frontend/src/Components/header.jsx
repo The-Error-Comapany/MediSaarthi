@@ -9,11 +9,11 @@ export default function Header() {
   const { user, logout } = useContext(AuthContext); 
 
   const navLinks = [
-    { to: "/app/dashboard", text: "Dashboard" },
-    { to: "/app/schedule", text: "Schedule" },
-    { to: "/app/reports", text: "Reports" },
-    { to: "/app/profile", text: "Profile" },
-    { to: "/app/chatbot", text: "ChatBot" },
+    { to: "/app/dashboard", text: "Dashboard", icon: "bi bi-house-heart" },
+    { to: "/app/schedule", text: "Schedule", icon: "bi bi-calendar-check" },
+    { to: "/app/reports", text: "Reports", icon: "bi bi-bar-chart-line" },
+    { to: "/app/chatbot", text: "ChatBot", icon: "bi bi-chat-dots" },
+    { to: "/app/profile", text: "Profile", icon: "bi bi-person" },
   ];
 
   const getLinkClasses = (path) => {
@@ -47,69 +47,88 @@ export default function Header() {
     : [{ name: "Login", path: "/signin" }];
 
   return (
-    <header
-      className="navbar navbar-expand-md shadow-sm"
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        height: HEADER_HEIGHT_PX,
-        zIndex: 1030,
-        margin: 0,
-      }}
-    >
-      <div className="container-fluid h-100 px-4">
-        <Link to="/" className="navbar-brand fw-bold fs-4 text-success">
-          MediSaarthi
-        </Link>
+    <>
+      <header
+        className="navbar navbar-expand-md shadow-sm"
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: HEADER_HEIGHT_PX,
+          zIndex: 1030,
+          margin: 0,
+        }}
+      >
+        <div className="container-fluid h-100 px-4">
+          <Link to="/" className="navbar-brand fw-bold fs-4 text-success">
+            MediSaarthi
+          </Link>
 
-        {/* Navigation Links */}
-        <nav   className="navbar-nav d-none d-md-flex align-items-center justify-content-center flex-grow-1"
-            style={{ height: "100%" }}
-          >
-          {navLinks.map((link) => (
+          {/* Navigation Links */}
+          <nav   className="navbar-nav d-none d-md-flex align-items-center justify-content-center flex-grow-1"
+              style={{ height: "100%" }}
+            >
+            {navLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className={getLinkClasses(link.to)}
+                style={{ height: "100%", display: "flex", alignItems: "center" }}
+              >
+                {link.text}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Profile Dropdown */}
+          <div className="position-relative">
+            <button
+              className="btn btn-outline-secondary rounded-circle d-flex align-items-center justify-content-center"
+              style={{ width: "40px", height: "40px" }}
+              onClick={() => setIsProfileOpen((prev) => !prev)}
+              aria-expanded={isProfileOpen}
+              aria-label="Toggle profile menu"
+            >
+              <i className="bi bi-person-fill fs-5"></i>
+            </button>
+
+            {isProfileOpen && (
+              <div
+                className="position-absolute end-0 mt-2 bg-white rounded-4 shadow-lg py-1 border border-light"
+                style={{ width: "12rem", zIndex: 1000 }}
+              >
+                {menuOptions.map((item) => (
+                  <button
+                    key={item.name}
+                    onClick={() => handleMenuClick(item)}
+                    className="dropdown-item"
+                  >
+                    {item.name}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </header>
+
+      {/* Glassmorphic Bottom Navigation Bar for Mobile and Tablet */}
+      <nav className="mobile-bottom-nav d-flex d-md-none justify-content-around align-items-center">
+        {navLinks.map((link) => {
+          const active = location.pathname.startsWith(link.to);
+          return (
             <Link
               key={link.to}
               to={link.to}
-              className={getLinkClasses(link.to)}
-              style={{ height: "100%", display: "flex", alignItems: "center" }}
+              className={`mobile-nav-item ${active ? "active" : ""}`}
             >
-              {link.text}
+              <i className={`${link.icon} mobile-nav-icon`}></i>
+              <span className="mobile-nav-text">{link.text}</span>
             </Link>
-          ))}
-        </nav>
-
-        {/* Profile Dropdown */}
-        <div className="position-relative">
-          <button
-            className="btn btn-outline-secondary rounded-circle d-flex align-items-center justify-content-center"
-            style={{ width: "40px", height: "40px" }}
-            onClick={() => setIsProfileOpen((prev) => !prev)}
-            aria-expanded={isProfileOpen}
-            aria-label="Toggle profile menu"
-          >
-            <i className="bi bi-person-fill fs-5"></i>
-          </button>
-
-          {isProfileOpen && (
-            <div
-              className="position-absolute end-0 mt-2 bg-white rounded-4 shadow-lg py-1 border border-light"
-              style={{ width: "12rem", zIndex: 1000 }}
-            >
-              {menuOptions.map((item) => (
-                <button
-                  key={item.name}
-                  onClick={() => handleMenuClick(item)}
-                  className="dropdown-item"
-                >
-                  {item.name}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-    </header>
+          );
+        })}
+      </nav>
+    </>
   );
 }
