@@ -66,7 +66,13 @@ router.get("/oauth2callback", async (req, res) => {
     );
 
     // Redirect to the production frontend URL
-    res.redirect(`${process.env.FRONTEND_URL}/app/schedule?linked=true`);
+    // res.redirect(`${process.env.FRONTEND_URL}/app/schedule?linked=true`);
+
+    const frontendUrls = (process.env.FRONTEND_URL || "").split(",");
+    const primaryFrontendUrl = frontendUrls[0].trim() || "http://localhost:5173";
+    res.redirect(`${primaryFrontendUrl}/app/schedule?linked=true`);
+
+    
   } catch (err) {
     console.error("OAuth callback error:", err?.response?.data || err.message);
     res.status(500).send("OAuth failed");
